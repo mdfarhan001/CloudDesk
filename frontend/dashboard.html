@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CloudDesk – Productivity Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dashboard-body">
+
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <span class="cloud-icon">☁</span>
+        <span class="sidebar-title">CloudDesk</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-section="section-dashboard">🏠 Dashboard</a>
+        <a href="#" class="nav-item" data-section="section-projects">📁 Projects</a>
+        <a href="#" class="nav-item" data-section="section-tasks">✅ Tasks</a>
+        <a href="#" class="nav-item" data-section="section-notes">📝 Notes</a>
+        <a href="#" class="nav-item" data-section="section-files">📎 Files</a>
+        <a href="#" class="nav-item" data-section="section-team">👥 Team</a>
+        <a href="#" class="nav-item" data-section="section-settings">⚙ Settings</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="#" id="logoutBtn" class="nav-item logout">🚪 Logout</a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+      <!-- TOP NAVBAR -->
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <input type="text" class="search-box" placeholder="Search projects, tasks, files..." />
+        <div class="topbar-right">
+          <span class="notif-icon">🔔</span>
+          <div class="user-info">
+            <div class="user-avatar" id="userAvatar">U</div>
+            <div>
+              <div class="user-name" id="userName">Loading...</div>
+              <div class="user-role" id="userRole">Developer</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- DASHBOARD SECTION -->
+      <section id="section-dashboard" class="content-section active">
+        <h2 class="welcome-title">Welcome back, <span id="welcomeName">User</span> 👋</h2>
+        <p class="welcome-subtitle">Here's what's happening with your work today.</p>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Projects</div>
+            <div class="stat-value" id="statProjects">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Tasks</div>
+            <div class="stat-value" id="statTasks">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Completed Tasks</div>
+            <div class="stat-value" id="statCompleted">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Team Members</div>
+            <div class="stat-value" id="statTeam">0</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Recent Activity</h3>
+          <ul id="activityList" class="activity-list"></ul>
+        </div>
+      </section>
+
+      <!-- PROJECTS SECTION -->
+      <section id="section-projects" class="content-section">
+        <div class="section-header">
+          <h2>Projects</h2>
+          <button class="btn-primary btn-small" id="addProjectBtn">+ Add Project</button>
+        </div>
+        <div class="card">
+          <table class="data-table">
+            <thead>
+              <tr><th>Name</th><th>Status</th><th>Progress</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="projectsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TASKS SECTION -->
+      <section id="section-tasks" class="content-section">
+        <div class="section-header">
+          <h2>Tasks</h2>
+          <button class="btn-primary btn-small" id="addTaskBtn">+ Add Task</button>
+        </div>
+        <div class="card">
+          <table class="data-table">
+            <thead>
+              <tr><th>Title</th><th>Status</th><th>Priority</th><th>Due Date</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="tasksTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- NOTES SECTION -->
+      <section id="section-notes" class="content-section">
+        <div class="section-header">
+          <h2>Notes</h2>
+          <button class="btn-primary btn-small" id="addNoteBtn">+ Add Note</button>
+        </div>
+        <div class="card notes-grid" id="notesGrid"></div>
+      </section>
+
+      <!-- FILES SECTION -->
+      <section id="section-files" class="content-section">
+        <div class="section-header">
+          <h2>Files</h2>
+        </div>
+        <div class="card">
+          <p class="muted-text">File upload coming soon (future: AWS S3 integration).</p>
+          <table class="data-table">
+            <thead>
+              <tr><th>File Name</th><th>Type</th><th>Size</th><th>Uploaded</th></tr>
+            </thead>
+            <tbody id="filesTableBody">
+              <tr><td colspan="4" class="muted-text">No files uploaded yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TEAM SECTION -->
+      <section id="section-team" class="content-section">
+        <div class="section-header">
+          <h2>Team</h2>
+        </div>
+        <div class="card">
+          <table class="data-table">
+            <thead>
+              <tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr>
+            </thead>
+            <tbody id="teamTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SETTINGS SECTION -->
+      <section id="section-settings" class="content-section">
+        <div class="section-header">
+          <h2>Settings</h2>
+        </div>
+        <div class="card settings-card">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="settingsName" disabled />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" id="settingsEmail" disabled />
+          </div>
+          <p class="muted-text">Profile editing coming in a future update.</p>
+          <button class="btn-primary btn-small" id="settingsLogoutBtn">Logout</button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
